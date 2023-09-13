@@ -6,6 +6,8 @@ rm -rf ~/.kube
 KUBE_VERSION=${KUBE_VERSION:-1.21.0}
 MINIKUBE_REGISTRY_IMAGE=${REGISTRY_IMAGE:-"registry"}
 COPY_DOCKER_LOGIN=${COPY_DOCKER_LOGIN:-"false"}
+TEST_KUBECTL_VERSION=v1.21.0
+TEST_MINIKUBE_VERSION=v1.24.0
 
 DEFAULT_MINIKUBE_MEMORY=$(free -m | grep "Mem" | awk '{print $2}')
 DEFAULT_MINIKUBE_CPU=$(awk '$1~/cpu[0-9]/{usage=($2+$4)*100/($2+$4+$5); print $1": "usage"%"}' /proc/stat | wc -l)
