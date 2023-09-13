@@ -37,7 +37,6 @@ def buildKeycloakAndOpa_ppc64le(String workspace) {
 
 def buildStrimziImages() {
     sh(script: """
-        eval \$(minikube docker-env)
         MVN_ARGS='-Dsurefire.rerunFailingTestsCount=5 -Dfailsafe.rerunFailingTestsCount=2' make all TESTCONTAINERS_RYUK_DISABLED=TRUE TESTCONTAINERS_CHECKS_DISABLE=TRUE
     """)
 }
