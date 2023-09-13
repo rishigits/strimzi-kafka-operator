@@ -37,7 +37,7 @@ def buildKeycloakAndOpa_ppc64le(String workspace) {
 
 def buildStrimziImages() {
     sh(script: """
-        MVN_ARGS='-Dsurefire.rerunFailingTestsCount=5 -Dfailsafe.rerunFailingTestsCount=2' make all TESTCONTAINERS_RYUK_DISABLED=TRUE TESTCONTAINERS_CHECKS_DISABLE=TRUE
+        JAVA_HOME=/usr/lib/jvm/java-17-openjdk-s390x MVN_ARGS='-Dsurefire.rerunFailingTestsCount=5 -Dfailsafe.rerunFailingTestsCount=2' make all TESTCONTAINERS_RYUK_DISABLED=TRUE TESTCONTAINERS_CHECKS_DISABLE=TRUE
     """)
 }
 
@@ -56,7 +56,7 @@ def runSystemTests(String workspace, String testCases, String testProfile, Strin
     def groupsTag = testGroups.isEmpty() ? "" : "-Dgroups=${testGroups} "
     def testcasesTag = testCases.isEmpty() ? "" : "-Dit.test=${testCases} "
     withMaven(mavenOpts: '-Djansi.force=true') {
-        sh(script: "mvn -f ${workspace}/systemtest/pom.xml verify " +
+        sh(script: "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-s390x mvn -f ${workspace}/systemtest/pom.xml verify " +
             "-P${testProfile} " +
             "${groupsTag}" +
             "-DexcludedGroups=${excludeGroups} " +
