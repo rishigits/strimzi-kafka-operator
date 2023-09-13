@@ -37,6 +37,7 @@ def buildKeycloakAndOpa_ppc64le(String workspace) {
 
 def buildStrimziImages() {
     sh(script: """
+        eval \$(minikube docker-env)
         JAVA_HOME=/usr/lib/jvm/java-17-openjdk-s390x MVN_ARGS='-Dsurefire.rerunFailingTestsCount=5 -Dfailsafe.rerunFailingTestsCount=2' make all TESTCONTAINERS_RYUK_DISABLED=TRUE TESTCONTAINERS_CHECKS_DISABLE=TRUE
     """)
 }
